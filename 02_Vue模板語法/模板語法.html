@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h1>插植語法</h1>
+        <h3>Hello, {{name}}</h3>
+        <hr/>
+        <h1>指令語法</h1>
+        <a v-bind:href="school.url.toUpperCase()" x="hello">點我去{{school.name}}</a>
+        <!-- v-bind:  能簡寫為  : -->
+        <!-- <a :href="url.toUpperCase()" x="hello">點我去youtube</a> -->
+    </div>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false;
+
+        new Vue({
+            el: '#root',
+            data: {
+                name:'jack',
+                school:{
+                    url: 'https://www.youtube.com/',
+                    name:'小明'
+                }
+            }
+        })
+    </script>
+</body>
+</html>

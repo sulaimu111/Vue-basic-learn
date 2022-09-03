@@ -9,8 +9,25 @@
     <script type="text/javascript" src="../js/vue.js"></script>
 </head>
 <body>
+    <!-- 準備容器 -->
+    <div id="root">
+        <!-- {{}}為插植語法 -->
+        <h1>Hello, {{name.toUpperCase()}}. {{address}}. {{Date.now()}}</h1> 
+    </div>
+
     <script type="text/javascript">
-        Vue.config.productionTip = false;
+        Vue.config.productionTip = false; //停止Vue提示開發模式
+
+        //創建Vue實例
+        new Vue({
+            el: '#root', //el用於當前Vue實例為哪個容器服務，值通常為CSS選擇棄字串
+            data: { //data中用於儲存數據，數據供el所指定的容器去使用，值在目前暫時寫為一個對象
+                name: 'spock',
+                address: 'Taipei'
+            }
+        });
+
+        
     </script>
 </body>
 </html>

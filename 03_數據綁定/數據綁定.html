@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <!-- 準備容器 -->
+    <div id="root">
+        <!-- 一般寫法 -->
+        <!-- 單向數據綁定: <input type="text" v-bind:value="name"><br/>
+        雙向數據綁定: <input type="text" v-model:value="name"><br/> -->
+        <!-- v-model只能用在表單類(輸入類)元素上(如:input、select..等)，否則會發生錯誤。
+            在元素中具有value的值，因為v-model默認就是蒐集value的值。
+            v-model:value可以簡寫為v-model
+        -->
+
+        <!-- 簡寫 -->
+        單向數據綁定: <input type="text" :value="name"><br/>
+        雙向數據綁定: <input type="text" v-model="name"><br/>
+        <!-- v-model:value找的就是value，所以可以簡寫為v-model="name" -->
+    </div>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false; //阻止Vue在啟動時產生開發提示
+
+        new Vue({
+            el:'#root',
+            data:{
+                name:'spock'
+            }
+        })
+    </script>
+</body>
+</html>

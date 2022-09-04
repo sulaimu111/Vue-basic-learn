@@ -10,24 +10,34 @@
 <body>
     <!-- 準備容器 -->
     <div id="root">
-        <h1>插植語法</h1>
-        <h3>Hello, {{name}}</h3>
-        <hr/>
-        <h1>指令語法</h1>
-        <a v-bind:href="school.url.toUpperCase()" x="hello">點我去{{school.name}}</a>
-        <!-- v-bind:  能簡寫為  : -->
-        <!-- <a :href="url.toUpperCase()" x="hello">點我去youtube</a> -->
+        <h1>您好，{{name}}</h1>
     </div>
 
     <script type="text/javascript">
         Vue.config.productionTip = false; //阻止Vue在啟動時產生開發提示
 
+
+        // el的兩種寫法
+        /*const v = new Vue({
+            // el:'#root', //第一種寫法
+            data:{
+                name:'小明'
+            }
+        });
+        // console.log(v)
+        v.$mount('#root'); //第二種寫法 */
+
         new Vue({
-            el: '#root',
-            data: {
-                name:'jack',
-                school:{
-                    url: 'https://www.youtube.com/',
+            el:'#root',
+            //data的第一種寫法: 對象式
+            // data:{
+            //     name:'小明'
+            // }
+
+            //data的第二種寫法: 函數式
+            data(){
+                console.log('@@@@', this); //此處的this是Vue的實例對象
+                return{
                     name:'小明'
                 }
             }

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <!-- 準備容器 -->
+    <div id="root"> <!-- View視圖 -->
+        <h1>學校名稱: {{name}}</h1> <!-- View視圖 -->
+        <h1>學校地址: {{address}}</h1> <!-- View視圖 -->
+        <!-- 
+        <h1>測試一下1: {{2}}</h1>
+        <h1>測試一下2: {{$el}}</h1>
+        <h1>測試一下3: {{$emit}}</h1>
+        <h1>測試一下4: {{_c}}</h1>
+         -->
+        
+    </div>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false; //阻止Vue在啟動時產生開發提示
+
+        const vm = new Vue({ //ViewModel 視圖模型
+            el:'#root',
+            data:{
+                name:'小明', //Model 數據
+                address:'Taipei' //Model
+            }
+        });
+        console.log(vm)
+    </script>
+</body>
+</html>

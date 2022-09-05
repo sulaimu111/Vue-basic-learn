@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件修飾符</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <style>
+        *{
+            margin-top: 20px;
+        }
+        .demo1{
+            padding-bottom: 20px;
+            background-color: #0fa;
+            /* line-height: 20px; */
+            /* height: 50px; */
+            
+        }
+        .box1{
+            padding: 5px;
+            background-color: skyblue;
+        }
+        .box2{
+            padding: 5px;
+            background-color: orange;
+        }
+        .list{
+            width: 200px;
+            height: 200px;
+            background-color: peru;
+            overflow: auto;
+        }
+        li{
+            height: 100px;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- 
+        Vue中的事件修飾符:
+        1.prevent: 阻止默認事件(常用)
+        2.stop: 阻止事件冒泡，就是阻止事件重複發生(常用)
+        3.once: 事件只觸發一次(常用)
+        4.capture: 使用事件的捕獲模式
+        5.self: 只有event.target是當前操作的元素才會觸發事件
+        6.passive: 事件的默認行為立即執行，無需等待事件回調執行完畢
+     -->
+
+    
+    <!-- 準備容器 -->
+    <div id="root">
+        <h2>歡迎來到{{name}}的網站</h2>
+        <!-- 阻止默認事件(常用) -->
+        <a href="https://www.youtube.com/" @click.prevent="showInfo">點我進入youtube</a>
+
+        <!-- 阻止事件冒泡，就是阻止事件重複發生(常用) -->
+        <div class="demo1" @click="showInfo">
+            <button @click.stop="showInfo">點我進入youtube</button>
+
+            <!-- 修飾符可以連續寫，此處加了prevent阻止默認事件 -->
+            <a href="https://www.youtube.com/" @click.stop.prevent="showInfo">點我進入youtube</a>
+        </div>
+
+        <!-- 事件只觸發一次(常用) -->
+        <button @click.once="showInfo">點我進入youtube</button>
+
+        <!-- 使用事件的捕獲模式，會使冒泡反過來，從外層往內觸發，而冒泡是由內往外觸發 -->
+        <div class="box1" @click.capture="showMsg(1)">
+            div1
+            <div class="box2" @click="showMsg(2)">
+                div2
+            </div>
+        </div>
+
+        <!-- 只有event.target是當前操作的元素才會觸發事件 -->
+        <div class="demo1" @click.self="showInfo">
+            <button @click="showInfo">點我進入youtube</button>
+        </div>
+
+        <!-- 事件的默認行為立即執行，無需等待事件回調執行完畢 -->
+        <ul @wheel.passive="demo" class="list">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ul>
+    </div>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false; //阻止Vue在啟動時產生開發提示
+
+        const vm = new Vue({
+            el:'#root',
+            data:{
+                name:'小白'
+            },
+            methods:{
+                showInfo(e){
+                    alert('您好!')
+                    // console.log(e.target)
+                },
+                showMsg(msg){
+                    console.log(msg)
+                },
+                demo(){
+                    for (let index = 0; index < 100000; index++) {
+                        console.log('@')
+                        
+                    }
+                    
+                }
+            }
+        })
+    </script>
+</body>
+</html>

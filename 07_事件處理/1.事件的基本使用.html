@@ -10,13 +10,33 @@
 <body>
     <!-- 準備容器 -->
     <div id="root">
-        
+        <h2>歡迎來到{{name}}的網站</h2>
+        <button v-on:click="showInfo1">點我提示訊息1(不傳參數)</button>
+        <button @click="showInfo2(66, $event)">點我提示訊息2(傳參數)</button>
     </div>
 
     <script type="text/javascript">
         Vue.config.productionTip = false; //阻止Vue在啟動時產生開發提示
 
-        
+        const vm = new Vue({
+            el:'#root',
+            data:{
+                name:'小白'
+            },
+            methods:{
+                showInfo1(event){
+                    // console.log(event.target.innerText)
+                    // console.log(this === vm)
+                    alert('歡迎!')
+                },
+                showInfo2(number, a){
+                    // console.log(event.target.innerText)
+                    // console.log(this === vm)
+                    console.log(number, a)
+                    alert('歡迎!!!')
+                }
+            }
+        })
     </script>
 </body>
 </html>

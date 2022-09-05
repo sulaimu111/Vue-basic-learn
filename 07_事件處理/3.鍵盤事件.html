@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>鍵盤事件</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <!-- 
+        1.Vue常用的按鍵別名:
+            回車 => enter
+            刪除 => delete
+            退出 => esc
+            空格 => space
+            換行 => tab (特殊，必須配合keydown去使用)
+            上 => up
+            下 => down
+            左 => left
+            右 => right
+
+        2.使用consol.log(event.key); 可以獲取按鍵所顯示的名稱，例如大寫切換CapLock鍵，這種由兩個單字組成的鍵可以將字母變成小寫，寫中間加上-號，cap-lock
+
+        3.系統修飾鍵，ctrl、alt、shift、meta
+            (1) 配合keyup使用，需要再按下修飾鍵時，再按下其他鍵，之後要放開其他鍵，事件才能被觸發，例如:ctrl+y。
+            (2) 配合keydown使用，直接按下即可觸發事件。
+
+        4.不建議使用e.keycode來進行觸發，因為每個鍵盤的按鍵編碼可能會不一樣，容易出錯。
+
+    -->
+
+    <!-- 準備容器 -->
+    <div id="root">
+        <h2>歡迎來到{{name}}的網站</h2>
+        <input type="text" placeholder="按下ENTER提示輸入" @keyup.ctrl.y="showInfo">
+    </div>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false; //阻止Vue在啟動時產生開發提示
+
+        const vm = new Vue({
+            el:'#root',
+            data:{
+                name:'小白'
+            },
+            methods:{
+                showInfo(e){
+                    // console.log(e.keyCode)
+                    console.log(e.key)
+                    // console.log(e.target.value)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

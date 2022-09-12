@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue監測數據改變的原理_數組</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h1>學校信息</h1>
+        <h2>學校名稱: {{school.name}}</h2>
+        <h2>學校地址: {{school.address}}</h2>
+        <h2 v-if="school.leader">校長是: {{school.leader}}</h2> 
+        <hr/>
+        <h1>學生信息</h1>
+        <button @click="addSex">添加一個性別屬性，默認值是男</button>
+        <h2>學生姓名: {{student.name}}</h2>
+        <h2 v-if="student.sex">學生性別: {{student.sex}}</h2>
+        <h2>學生年齡: 真實{{student.age.realAge}}. 對外{{student.age.fakeAge}}</h2>
+        <h2>愛好</h2>
+        <ul>
+            <li v-for="(h, index) in student.hobby" :key="index">
+                {{h}}
+            </li>
+        </ul>
+        <h2>朋友們</h2>
+        <ul>
+            <li v-for="(f, index) in student.friends" :key="index">
+                {{f.name}} --- {{f.age}}
+            </li>
+        </ul>
+    </div>
+
+    <script type="text/javascript">
+        Vue.config.productionTip=false
+
+        const vm = new Vue({
+            el:'#root',
+            data:{
+                school:{
+                    name:'小白',
+                    address:'台北',
+                },
+                student:{
+                    name:'tom',
+                    age:{
+                        realAge:40,
+                        fakeAge:20
+                    },
+                    hobby:['玩手機','燙頭髮','打電腦'],
+                    friends:[
+                    {name:'jerry', age:36},
+                    {name:'tony', age:33}
+                ]
+                },
+                
+            },
+            methods:{
+                addSex(){
+                    Vue.set(this.student, 'sex', '男')
+                    this.$set(this.student, 'sex', '男')
+                }
+            }
+        })
+    </script>
+</body>
+</html>

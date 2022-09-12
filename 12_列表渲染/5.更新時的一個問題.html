@@ -39,7 +39,8 @@
                     // this.persons[0].name = '馬老師' //能使用
                     // this.persons[0].age = 50 //能使用
                     // this.persons[0].sex = '男' //能使用
-                    this.persons[0] = {id:'001', name:'馬老師', age:50, sex:'男'}
+                    // this.persons[0] = {id:'001', name:'馬老師', age:50, sex:'男'} //無法使用
+                    this.persons.splice(0, 1, {id:'001', name:'馬老師', age:50, sex:'男'})
                 }
             }
         })

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自定義指令</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h2>當前的n值是: <span v-text="n"></span></h2>
+        <!-- <h2>放大10倍的n值是: <span v-big-number="n"></span></h2> -->
+        <h2>放大10倍的n值是: <span v-big="n"></span></h2>
+        <button @click="n++">點我n+1</button>
+
+        <hr/>
+        <input type="text" v-fbind:value="n">
+    </div>
+
+    <div id="root2">
+        <input type="text" v-fbind:value="x">
+    </div>
+
+    <script type="text/javascript">
+        Vue.config.productionTip=false
+
+        //定義全局指令
+        /* Vue.directive('fbind', {
+            //指令與元素成功綁定時(一開始)
+            bind(element, binding){
+                // console.log('bind')
+                element.value = binding.value
+            },
+            //指令所在元素被插入頁面時
+            inserted(element, binding){
+                // console.log('inserted')
+                element.focus() //將元素焦點化
+            },
+            //指令所在的模板被重新解析時，會被調用
+            update(element, binding){
+                // console.log('update')
+                element.value = binding.value
+                element.focus()
+            }
+        }) */
+
+        /* Vue.directive('big', function(element, binding){
+            // console.log(a instanceof HTMLElement)
+            element.innerText = binding.value * 10
+            // console.log(element, binding.value)
+        }) */
+        
+        new Vue({
+            el:'#root',
+            data:{
+                n:1
+            },
+            directives:{
+                //big函數何時會被調用? 1.指令與元素成功綁定時(一開始)。2.指令所在的模板被重新解析時，會被調用。
+                // 'big-number'(element, binding){ //多個單字為函數名，需當成完整字串'XXX'來撰寫
+                //     // console.log(a instanceof HTMLElement)
+                //     element.innerText = binding.value * 10
+                //     // console.log(element, binding.value)
+                // },
+                big(element, binding){
+                    // console.log(a instanceof HTMLElement)
+                    element.innerText = binding.value * 10
+                    // console.log(element, binding.value)
+                },
+                // 寫成函數時focus無法正常運作，需寫成對象
+                // fbind(element, binding){
+                //     element.value = binding.value
+                //     element.focus()
+                // }
+                fbind:{
+                    //指令與元素成功綁定時(一開始)
+                    bind(element, binding){
+                        // console.log('bind')
+                        element.value = binding.value
+                    },
+                    //指令所在元素被插入頁面時
+                    inserted(element, binding){
+                        // console.log('inserted')
+                        element.focus() //將元素焦點化
+                    },
+                    //指令所在的模板被重新解析時，會被調用
+                    update(element, binding){
+                        // console.log('update')
+                        element.value = binding.value
+                        element.focus()
+                    }
+                }
+            }
+        })
+    
+        new Vue({
+            el:'#root2',
+            data:{
+                x:2
+            }
+        })
+    </script>
+</body>
+</html>

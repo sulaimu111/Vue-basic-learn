@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .demo{
+            background-color: #0af;
+        }
+    </style>
+</head>
+<body>
+    <button id="btn">點我創建一個輸入框</button>
+    <script type="text/javascript">
+        const btn = document.getElementById('btn')
+        btn.onclick = () => {
+            const input = document.createElement('input')
+
+            input.className = 'demo'
+            input.value = 99
+            input.onclick = ()=>{alert(1)}
+
+            document.body.appendChild(input)
+
+            //執行的時候須放在創建input框之後，才能夠正常運作
+            input.focus() 
+            input.parentElement.style.backgroundColor = 'skyblue'
+        }
+    </script>
+</body>
+</html>

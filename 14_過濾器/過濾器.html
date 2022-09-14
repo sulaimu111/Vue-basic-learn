@@ -17,17 +17,27 @@
         <h3>現在是: {{getFmtTime()}}</h3>
         <!-- 過濾器實現 -->
         <h3>現在是: {{time | timeFormater}}</h3>
+        <!-- 過濾器實現(傳參數) -->
+        <h3>現在是: {{time | timeFormater('YYYY年MM月DD日') | mySlice}}</h3>
+        <h3 :x="msg | mySlice">YA</h3>
+    </div>
 
-        <h3>現在是: {{time | timeFormater('YYYY年MM月DD日 ') | mySlice}}</h3>
+    <div id="root2">
+        <h2>{{msg | mySlice}}</h2>
     </div>
 
     <script type="text/javascript">
         Vue.config.productionTip=false
+        //全局過濾器
+        Vue.filter('mySlice', function(value){
+            return value.slice(0,5)
+        })
 
         new Vue({
             el:'#root',
             data:{
-                time:1662986130115
+                time:1662986130115,
+                msg:'您好阿，帥哥小白'
             },
             computed:{
                 fmtTime(){
@@ -45,9 +55,17 @@
                     // console.log('@', value)
                     return dayjs(value).format(str)
                 },
-                mySlice(value){
-                    return value.slice(0,5)
-                }
+                // mySlice(value){
+                //     return value.slice(0,5)
+                // }
+            }
+        })
+
+
+        new Vue({
+            el:'#root2',
+            data:{
+                msg:'hello, spock'
             }
         })
     </script>

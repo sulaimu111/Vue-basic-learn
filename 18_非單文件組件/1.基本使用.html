@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基本使用</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h1>{{msg}}</h1>
+        <hello></hello>
+        <hr>
+        <!-- 第三步: 編寫組件標籤 -->
+        <school></school>
+        <hr>
+        <!-- 第三步: 編寫組件標籤 -->
+        <student></student>
+    </div>
+
+    <div id="root2">
+        <hello></hello>
+    </div>
+
+    <script type="text/javascript">
+        Vue.config.productionTip=false
+
+        //第一步: 創建school組件
+        const school = Vue.extend({
+            template:`
+                <div>
+                    <h2>學校名稱: {{schoolName}}</h2>
+                    <h2>學校地址: {{address}}</h2>
+                    <button @click="showName">點我提示學校名</button>
+                </div>
+            `,
+            // el:'#root', //組件定義時，一定不要寫el配置項，因為最終所有的組件都要被一個vm管理，由vm決定服務於哪個容器。
+            data(){
+                return {
+                    schoolName:'台大',
+                    address:'台北'
+                }
+            },
+            methods:{
+                showName(){
+                    alert(this.schoolName)
+                }
+            }
+        })
+
+        //第一步: 創建student組件
+        const student = Vue.extend({
+            template:`
+                <div>
+                    <h2>學生姓名: {{studentName}}</h2>
+                    <h2>學生年齡: {{age}}</h2>
+                </div>
+            `,
+            data(){
+                return {
+                    studentName:'小白',
+                    age:18
+                }
+            }
+        })
+        
+
+        //第一步: 創建hello組件
+        const hello = Vue.extend({
+            template:`
+                <div>
+                    <h2>你好啊! {{name}}</h2>
+                </div>
+            `,
+            data(){
+                return {
+                    name:'Tom'
+                }
+            }
+        })
+
+        //第二步: 全局註冊組件
+        Vue.component('hello', hello)
+
+        //創建vm
+        new Vue({
+            el:'#root',
+            // 第二步: 註冊組建(局部註冊)
+            components:{
+                school,
+                student
+            },
+            data:{
+                msg:'你好啊!'
+            }
+        })
+
+        new Vue({
+            el:'#root2',
+        })
+    </script>
+</body>
+</html>

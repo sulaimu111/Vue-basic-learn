@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>引出生命週期</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h2 :style="{opacity}">歡迎學習Vue</h2>
+        <button @click="opacity=1">透明度設定為1</button>
+        <button @click="stop">點我停止變換</button>
+    </div>
+
+    <script type="text/javascript">
+        Vue.config.productionTip=false
+
+        const vm = new Vue({
+            el:'#root',
+            data:{
+                opacity:1
+            },
+            methods:{
+                /* change(){
+                    setInterval(()=>{
+                        this.opacity -= 0.01
+                        if(this.opacity <= 0) this.opacity = 1
+                    },16)
+                } */
+                stop(){
+                    this.$destroy()
+                }
+            },
+            //Vue完成模板的解析，並把初始的真實DOM元素放入頁面後(掛載完畢)調用mounted
+            mounted(){
+                console.log('mounted')
+                this.timer = setInterval(()=>{
+                        console.log('setInterval')
+                        this.opacity -= 0.01
+                        if(this.opacity <= 0) this.opacity = 1
+                    },16)
+            },
+            beforeDestroy(){
+                console.log('vm即將關閉 ')
+                clearInterval(this.timer)
+            }
+        })
+    </script>
+</body>
+</html>
